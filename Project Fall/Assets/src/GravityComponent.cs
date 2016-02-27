@@ -13,7 +13,7 @@ namespace Assets.src
 
         public Transform Reference;
 
-        public static float pull = -80f;
+        public static float pull = -610f;
 
         public void Awake()
         {

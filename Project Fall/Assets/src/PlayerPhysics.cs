@@ -3,11 +3,11 @@ using System.Collections;
 
 public class PlayerPhysics : MonoBehaviour {
 
-    public GameObject Planet;
+    public Transform Planet;
 
     private Rigidbody myRB;
 
-    public float force = 48f;
+    public float force = 128f;
 
     public void Awake()
     {
@@ -20,26 +20,10 @@ public class PlayerPhysics : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-        Vector3 offset = transform.position - Planet.transform.position;
-        offset.Normalize();
-
-      
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-          //  transform.Rotate(0, -force , 0, Space.World);
-        }
-
-        
-
-	}
 
     public void FixedUpdate()
     {
-        Vector3 offset = transform.position - Planet.transform.position;
+        Vector3 offset = transform.position - Planet.position;
 
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -52,13 +36,21 @@ public class PlayerPhysics : MonoBehaviour {
             transform.localRotation *= Quaternion.Euler(0, force, 0);
         }
 
-        myRB.AddRelativeForce(0, 0, 40f);
+        myRB.AddRelativeForce(0, 0, 120f);
 
         Vector3 vel = myRB.velocity;
         vel.Normalize();
         offset = vel - transform.position;
-        transform.LookAt(Planet.transform, vel);
+        transform.LookAt(Planet, vel);
 
-        transform.Rotate(Vector3.left, 90);
+        transform.Rotate(Vector3.left, 110);
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            myRB.AddRelativeForce(0, 0, 320f);
+        }
+
+        
     }
+
 }
